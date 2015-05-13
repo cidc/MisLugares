@@ -21,6 +21,8 @@
             android:label="Acerca de ..."/>
         <activity android:name=".Preferencias"
             android:label="Preferencias" />
+        <activity android:name=".VistaLugar"
+            android:label="Vista Lugar" />
     </application>
 
 </manifest>

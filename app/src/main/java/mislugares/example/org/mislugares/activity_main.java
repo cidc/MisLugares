@@ -1,5 +1,7 @@
 package mislugares.example.org.mislugares;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -9,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -40,6 +43,10 @@ public class activity_main extends ActionBarActivity {
                 lanzarAcercaDe(null);
                 return true;
             }
+        if(id == R.id.menu_buscar) {
+            lanzarVistaLugar(null);
+            return true;
+        }
 
             return true; /** true -> consumimos el item, no se propaga*/
         }
@@ -65,5 +72,23 @@ public class activity_main extends ActionBarActivity {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
+    public void lanzarVistaLugar(View view){
+        final EditText entrada = new EditText(this);
+        entrada.setText("0");
+        new AlertDialog.Builder(this)
+                .setTitle("Selección de lugar")
+                .setMessage("indica su id:")
+                .setView(entrada)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        long id = Long.parseLong(entrada.getText().toString());
+                        Intent i = new Intent(activity_main.this, VistaLugar.class);
+                        i.putExtra("id", id);
+                        startActivity(i);
+                    }})
+
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
 
 }
